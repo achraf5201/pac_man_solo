@@ -23,6 +23,7 @@ class RedGhost(ghost):
     def __init__(self, maze, png="images/red_ghost.png", size=0.09):
         super().__init__(png=png, maze=maze, size=size)
 
+
 class GreenGhost(ghost):
     def __init__(self, maze, png="images/green_ghost.png", size=0.09):
         super().__init__(png=png, maze=maze, size=size)

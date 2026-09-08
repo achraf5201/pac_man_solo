@@ -1,6 +1,5 @@
 import arcade
 import sys
-import time
 
 
 class MazeAdapter:
@@ -14,10 +13,17 @@ class MazeAdapter:
         self.offset_x = 0
         self.offset_y = 0
 
-    def grid_to_pixel(self, row, col):
-        x = self.offset_x + (col * self.cell_size) + self.cell_size / 2
-        y = self.offset_y + (row * self.cell_size) + self.cell_size / 2
+    def cell_to_pixel(self, y, x):
+        pix_x = self.offset_x + (x * self.cell_size)
+        pix_y = self.offset_y + (y * self.cell_size)
+        return pix_x, pix_y
+
+    def pixel_to_cell(self, pix_x, pix_y):
+        x = (pix_x - self.offset_x) // self.cell_size
+        y = (pix_y - self.offset_y) // self.cell_size
         return x, y
+
+
 
     def _calc_config(self):
         self.maze_width = len(self.maze._maze[0])
