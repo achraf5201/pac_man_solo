@@ -1,11 +1,11 @@
-from maze.maze_view import MazeView
+from maze.maze_view import GameView
 import arcade
 
 
 def main():
     window = arcade.Window(fullscreen=True, title="Maze")
 
-    view = MazeView()
+    view = GameView()
     window.show_view(view)
     arcade.run()
 
