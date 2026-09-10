@@ -28,14 +28,26 @@ class MazeModel:
             if self.can_move(x, y, 1):
                 res.append((x, y - 1))
         if 0 <= x + 1 < self.width and 0 <= y < self.height:
-            if self.can_move(x, y, 2):
+            if self.can_move(x + 1, y, 2):
                 res.append((x + 1, y))
         if 0 <= x < self.width and 0 <= y + 1 < self.height:
-            if self.can_move(x, y, 4):
+            if self.can_move(x, y + 1, 4):
                 res.append((x, y + 1))
         if 0 <= x - 1 < self.width and 0 <= y < self.height:
-            if self.can_move(x, y, 8):
+            if self.can_move(x - 1, y, 8):
                 res.append((x - 1, y))
+        return res
+
+    def p_neighbors(self, x, y):
+        res = []
+        if 0 <= x < self.width and 0 <= y - 1 < self.height:
+            res.append((x, y - 1))
+        if 0 <= x + 1 < self.width and 0 <= y < self.height:
+            res.append((x + 1, y))
+        if 0 <= x < self.width and 0 <= y + 1 < self.height:
+            res.append((x, y + 1))
+        if 0 <= x - 1 < self.width and 0 <= y < self.height:
+            res.append((x - 1, y))
         return res
 
 
