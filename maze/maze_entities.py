@@ -1,4 +1,3 @@
-import random
 import arcade
 from maze.maze_adapter import MazeAdapter
 
@@ -8,34 +7,49 @@ class Entity:
 
 
 class Player:
-    def __init__(self, x, y, pixel_x, pixel_y, speed, maze, cell_size):
-        self.pixel_x = pixel_x
-        self.pixel_y = pixel_y
+    def __init__(self, x, y, pixel_x, pixel_y, speed, maze_adapter):
         self.cell_x = x
         self.cell_y = y
+        self.pixel_x = pixel_x
+        self.pixel_y = pixel_y
         self.speed = speed
-        self.maze_model = MazeAdapter(maze)
-        self.dir = None
+        self.maze_adapter = maze_adapter
+
+        self.current_dir = None
         self.next_dir = None
 
-    def hundle_input(self, dir):
-        self.next_dir = dir
+        self.target_cell_x = x
+        self.target_cell_y = y
+        self.target_px = pixel_x
+        self.target_py = pixel_y
 
-    def get_cor(self, dir):
-        if dir == 1:
+        self.start_angle = 20
+        self.end_angle = 340
+        self.flag = 1
+
+    def get_cor(self, direction):
+        if direction == 1:
             return 0, -1
-        elif dir == 2:
+        elif direction == 2:
             return 1, 0
-        elif dir == 4:
+        elif direction == 4:
             return 0, 1
-        elif dir == 8:
+        elif direction == 8:
             return -1, 0
+        return 0, 0
 
-    def update(self):
-        if self.maze_model.can_move(self.cell_x, self.cell_y, self.next_dir):
-            x, y = self.get_cor(self.next_dir)
-            self.cell_x = x
-            self.cell_y
+    def update(self, delta_time):
+        if self.flag == 1:
+            self.start_angle += 120 * delta_time
+            self.end_angle -= 120 * delta_time
+            if self.start_angle >= 45:
+                self.flag = 0
+        else:
+            self.start_angle -= 120 * delta_time
+            self.end_angle += 120 * delta_time
+            if self.start_angle <= 5:
+                self.flag = 1
+
 
 
 class Ghost(Entity):
